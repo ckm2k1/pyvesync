@@ -2599,7 +2599,9 @@ class VeSyncSuperior6000S(VeSyncBaseDevice):
 
     def build_humid_dict(self, dev_dict: Dict[str, str]) -> None:
         """Build humidifier status dictionary."""
-        self.device_status = 'off' if dev_dict.get('powerSwitch', 0) == 0 else 'on'
+        power_switch = dev_dict.get('powerSwitch', 0)
+        self.enabled = power_switch
+        self.device_status = 'off' if power_switch == 0 else 'on'
         self.details['mode'] = self.mode = 'auto' if dev_dict.get('workMode', '') == 'autoPro' \
             else dev_dict.get('workMode', '')
         self.details['humidity'] = dev_dict.get('humidity', 0)
