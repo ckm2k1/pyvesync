@@ -2337,8 +2337,12 @@ class VeSyncSuperior6000S(VeSyncBaseDevice):
         self.details['display'] = dev_dict.get('screenSwitch', None)
         self.details['drying_mode'] = dev_dict.get('dryingMode', {})
 
-    def build_config_dict(self, _):
+    def build_config_dict(self, conf_dict):
         """Build configuration dict for humidifier."""
+        self.config['auto_target_humidity'] = conf_dict.get(
+            'targetHumidity', 0)
+        self.config['display'] = bool(conf_dict.get('screenSwitch', 0))
+        self.config['automatic_stop'] = bool(conf_dict.get('autoStopSwitch', 1))
 
     def get_details(self) -> None:
         """Build Humidifier details dictionary."""
@@ -2371,8 +2375,8 @@ class VeSyncSuperior6000S(VeSyncBaseDevice):
                 self.build_humid_dict(inner_result)
             else:
                 logger.debug('error in inner result dict from humidifier')
-            if inner_result.get('configuration', {}):
-                self.build_config_dict(inner_result.get('configuration', {}))
+            if conf := inner_result.get('configuration', {}):
+                self.build_config_dict(conf)
             else:
                 logger.debug('No configuration found in humidifier status')
         else:
