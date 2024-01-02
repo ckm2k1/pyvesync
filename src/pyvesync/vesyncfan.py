@@ -2655,10 +2655,9 @@ class VeSyncSuperior6000S(VeSyncBaseDevice):
                 self.build_humid_dict(inner_result)
             else:
                 logger.debug('error in inner result dict from humidifier')
-            if conf := inner_result.get('configuration', {}):
-                self.build_config_dict(conf)
-            else:
-                logger.debug('No configuration found in humidifier status')
+
+            self.build_config_dict(self.details)
+
         else:
             logger.debug('Error in humidifier response')
 
