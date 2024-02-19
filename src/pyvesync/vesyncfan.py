@@ -2876,7 +2876,7 @@ class VeSyncSuperior6000S(VeSyncBaseDevice):
     def filter_life(self) -> int:
         """Get percentage of filter life remaining."""
         try:
-            return int(self.details['filter_life'])
+            return int(self.details['filter_life_percentage'])
         except KeyError:
             return 0
 
