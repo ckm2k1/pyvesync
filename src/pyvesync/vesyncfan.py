@@ -76,7 +76,7 @@ humid_features: dict = {
             'models': ['LEH-S601S-WUS'],
             'features': [],
             'mist_modes': ['auto', 'humidity', 'sleep', 'manual'],
-            'mist_levels': list(range(1, 10))
+            'mist_levels': list(range(1, 5))
     }
 }
 
@@ -2656,7 +2656,7 @@ class VeSyncSuperior6000S(VeSyncBaseDevice):
             else:
                 logger.debug('error in inner result dict from humidifier')
 
-            self.build_config_dict(self.details)
+            self.build_config_dict(inner_result)
 
         else:
             logger.debug('Error in humidifier response')
@@ -2929,7 +2929,7 @@ class VeSyncSuperior6000S(VeSyncBaseDevice):
     @property
     def temperature(self):
         """Current temperature."""
-        return self.details['temperature']
+        return self.details.get('temperature')
 
     @property
     def target_humidity(self):
