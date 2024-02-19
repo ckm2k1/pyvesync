@@ -2873,6 +2873,14 @@ class VeSyncSuperior6000S(VeSyncBaseDevice):
         return False
 
     @property
+    def filter_life(self) -> int:
+        """Get percentage of filter life remaining."""
+        try:
+            return int(self.details['filter_life'])
+        except KeyError:
+            return 0
+
+    @property
     def humidity_level(self):
         """Get Humidity level."""
         return self.details['humidity']
