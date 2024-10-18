@@ -123,7 +123,7 @@ class VeSync:  # pylint: disable=function-redefined
             helpermodule.logger.setLevel(logging.DEBUG)
             kitchen_mods.logger.setLevel(logging.DEBUG)
         self._redact = redact
-        if redact:
+        if redact is not None:
             self.redact = redact
         self.username = username
         self.password = password
