@@ -2532,6 +2532,7 @@ class VeSyncSuperior6000S(VeSyncBaseDevice):
     def __init__(self, details, manager):
         """Initialize Superior 6000S Humidifier class."""
         super().__init__(details, manager)
+        self.enabled = True
         self._config_dict = model_features(self.device_type)
         self.mist_levels = self._config_dict.get('mist_levels')
         self.mist_modes = self._config_dict.get('mist_modes')
